@@ -17,7 +17,7 @@ public class TenMinutesPage extends AbstractPage {
     //    private ChromeDriver driver;
     private static final String EMAIL_PAGE_ADDRESS = "https://tempmail.plus/ru/#!";
     public static final String TAB_NAME = "Временная электронная почта";
-    private By copyEmailButton = By.id("pre_copy");
+//    private By copyEmailButton = By.id("pre_copy");
 
     @FindBy(xpath = "//div[@id='copy_address']/span")
     private WebElement buttonForSaveRandomEmail;
@@ -38,14 +38,14 @@ public class TenMinutesPage extends AbstractPage {
         return this;
     }
 
-    public String copyEmail() {
-        click(copyEmailButton);
-        try {
-            return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public String copyEmail() {
+//        click(copyEmailButton);
+//        try {
+//            return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 
     public TenMinutesPage saveEmailInBuffer() {
