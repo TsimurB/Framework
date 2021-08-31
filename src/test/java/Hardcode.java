@@ -34,7 +34,7 @@ public class Hardcode extends AbstractTest {
                 .switchToCalculator()
                 .initCompEngine()
                 .setNumberOfInstances("4")
-                .setOperatingSystemAndSoftware("Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS")
+                .setOperatingSystemAndSoftware("Free: Debian, CentOS, CoreOS, Ubuntu or BYOL (Bring Your Own License)")
                 .setVMClass(VMCLASS)
                 .setInstanceSeries("N1")
                 .setInstanceType(INSTANCETYPE)

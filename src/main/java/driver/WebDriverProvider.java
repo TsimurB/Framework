@@ -28,8 +28,8 @@ public class WebDriverProvider {
         return driver;
     }
 
-    public static void closeDriver() {
-        driver.quit();
-        driver = null;
-    }
+//    public static void closeDriver() {
+//        driver.quit();
+//        driver = null;
+//    }
 }

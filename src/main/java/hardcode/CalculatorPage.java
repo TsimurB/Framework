@@ -62,6 +62,7 @@ public class CalculatorPage extends AbstractPage {
     public hardcode.CalculatorPage setOperatingSystemAndSoftware(String text) {
 
         click(operatingSystemAndSoftwareDDD);
+//        driver.findElements(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", text))).click();
         click(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", text)));
         return this;
     }
