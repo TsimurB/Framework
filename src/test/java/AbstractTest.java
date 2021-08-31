@@ -11,11 +11,11 @@ public class AbstractTest {
         driver = WebDriverProvider.getDriver();
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void closeDriver() {
-//        WebDriverProvider.getDriver().close();
-        WebDriverProvider.closeDriver();
-    }
+//    @AfterMethod(alwaysRun = true)
+//    public void closeDriver() {
+////        WebDriverProvider.getDriver().close();
+//        WebDriverProvider.closeDriver();
+//    }
 
 //    @BeforeMethod(alwaysRun = true)
 //    public void browserSetup() {
@@ -23,9 +23,9 @@ public class AbstractTest {
 //        driver.manage().window().maximize();
 //    }
 //
-//    @AfterMethod(alwaysRun = true)
-//    public void browserTearDown() {
-//        driver.quit();
-//        driver = null;
-//    }
+    @AfterMethod(alwaysRun = true)
+    public void browserTearDown() {
+        driver.quit();
+        driver = null;
+    }
 }

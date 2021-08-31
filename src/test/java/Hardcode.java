@@ -1,3 +1,4 @@
+import driver.WebDriverProvider;
 import hardcode.CalculatorPage;
 import hardcode.MainPage;
 import hardcode.TenMinutesPage;
@@ -24,9 +25,9 @@ public class Hardcode extends AbstractTest {
         String LOCALSSD = "2x375 GB";
         String COMMITMENTTERM = "1 Year";
 
-//        this.calculatorPage = new CalculatorPage((ChromeDriver) WebDriverProvider.getDriver());
-//        MainPage mainPage = new MainPage((ChromeDriver) WebDriverProvider.getDriver());
-        CalculatorPage emailEstimatePage = new MainPage(driver)
+        this.calculatorPage = new CalculatorPage(WebDriverProvider.getDriver());
+        MainPage mainPage = new MainPage(WebDriverProvider.getDriver());
+        CalculatorPage emailEstimatePage = mainPage
                 .open()
                 .searchPage(TEXTFORSEARCHCALKULATOR + "\n")
                 .findCalk()
