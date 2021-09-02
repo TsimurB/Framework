@@ -10,6 +10,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static util.Util.switchToTab;
+
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Hardcode extends AbstractTest {
     private CalculatorPage calculatorPage;
@@ -56,36 +58,38 @@ public class Hardcode extends AbstractTest {
                 .contains(COMMITMENTTERM);
         assertions.assertAll();
 
-//        TenMinutesPage emailPage = new TenMinutesPage(WebDriverProvider.getDriver());
-//        String email = emailPage.openPage()
-//                .copyEmail();
-//        switchToTab(0);
-//        emailEstimatePage.typeEmail(email);
-
         String totalCostFromCalculatorPage = emailEstimatePage.getTotalCost();
         String sumOnlyFromTotalCost = totalCostFromCalculatorPage.substring(totalCostFromCalculatorPage.indexOf(":") + 2, totalCostFromCalculatorPage.indexOf("per") - 1);
+
+        TenMinutesPage emailPage = new TenMinutesPage(WebDriverProvider.getDriver());
+        String email = emailPage.openPage()
+                .copyEmail();
+        switchToTab(0);
+        emailEstimatePage.typeEmail(email);
+
+
 
 //        (JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
-        TenMinutesPage tenMinuteMailPage = new TenMinutesPage(driver);
-        tenMinuteMailPage.openPage()
-                .saveEmailInBuffer();
+//        TenMinutesPage tenMinuteMailPage = new TenMinutesPage(driver);
+//        tenMinuteMailPage.openPage()
+//                .saveEmailInBuffer();
+//
+//        String emailFromBuffer = tenMinuteMailPage.getRandomEmail();
 
-        String emailFromBuffer = tenMinuteMailPage.getRandomEmail();
-
-        driver.switchTo().window(tabs.get(0));
+//        driver.switchTo().window(tabs.get(0));
 
         emailEstimatePage.switchToCalculator()
                 .sendEmail(emailFromBuffer);
 
         driver.switchTo().window(tabs.get(1));
 
-        tenMinuteMailPage.openLetter()
+        emailPage.openLetter()
                 .getTotalSumFromLetter();
 
-        String totalCostFromLetter = tenMinuteMailPage.getTotalSumFromLetter();
+        String totalCostFromLetter = emailPage.getTotalSumFromLetter();
 
         assertions.assertThat(sumOnlyFromTotalCost.equals(totalCostFromLetter));
 

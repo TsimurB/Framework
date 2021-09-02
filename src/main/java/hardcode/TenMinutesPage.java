@@ -6,12 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
-
-import static util.Util.*;
+import static util.Util.openTab;
+import static util.Util.switchToTab;
 
 public class TenMinutesPage extends AbstractPage {
     //    private ChromeDriver driver;
@@ -37,24 +33,24 @@ public class TenMinutesPage extends AbstractPage {
         return this;
     }
 
-//    public String copyEmail() {
-//        click(copyEmailButton);
-//        try {
-//            return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
+    public String copyEmail() {
+        click(copyEmailButton);
+        try {
+            return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+//    public TenMinutesPage saveEmailInBuffer() {
+//        buttonForSaveRandomEmail.click();
+//        return this;
 //    }
-
-
-    public TenMinutesPage saveEmailInBuffer() {
-        buttonForSaveRandomEmail.click();
-        return this;
-    }
-
-    public String getRandomEmail() throws IOException, UnsupportedFlavorException {
-        return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-    }
+//
+//    public String getRandomEmail() throws IOException, UnsupportedFlavorException {
+//        return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+//    }
 
     public TenMinutesPage openLetter() {
         wait.until(ExpectedConditions.textToBe(quantityLettersBy, "1"));

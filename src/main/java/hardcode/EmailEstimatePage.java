@@ -15,7 +15,6 @@ private By emailField = By.xpath("//input[@type=\"email\"]");
     }
 
     public EmailEstimatePage typeEmail(String email){
-
         driver.findElement(emailField).sendKeys(email);
         return this;
     }
