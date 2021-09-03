@@ -17,8 +17,8 @@ public class TenMinutesPage extends AbstractPage {
     public static final String TAB_NAME = "Временная электронная почта";
     private By copyEmailButton = By.id("pre_copy");
     @FindBy(xpath = "//div[@id='copy_address']/span")
-    private WebElement buttonForSaveRandomEmail;
-    @FindBy(xpath = "//div[@class='message_top']")
+//    private WebElement buttonForSaveRandomEmail;
+//    @FindBy(xpath = "//div[@class='message_top']")
     private WebElement buttonOpenLetter;
     @FindBy(xpath = "//tr[@id='mobilepadding']//td[2]/h3")
     private WebElement totalEstimatedMonthlyCost;
@@ -43,7 +43,6 @@ public class TenMinutesPage extends AbstractPage {
             throw new RuntimeException(e);
         }
     }
-
 
 //    public TenMinutesPage saveEmailInBuffer() {
 //        buttonForSaveRandomEmail.click();
