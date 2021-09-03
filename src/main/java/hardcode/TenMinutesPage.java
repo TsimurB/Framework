@@ -12,11 +12,10 @@ import java.awt.datatransfer.DataFlavor;
 import static util.Util.*;
 
 public class TenMinutesPage extends AbstractPage {
-    //    private ChromeDriver driver;
     private static final String EMAIL_PAGE_ADDRESS = "https://tempmail.plus/ru/#!";
     public static final String TAB_NAME = "Временная электронная почта";
     private By copyEmailButton = By.id("pre_copy");
-//    @FindBy(xpath = "//div[@id='copy_address']/span")
+    //    @FindBy(xpath = "//div[@id='copy_address']/span")
 //    private WebElement buttonForSaveRandomEmail;
     @FindBy(xpath = "//div[@class='message_top']")
     private WebElement buttonOpenLetter;
