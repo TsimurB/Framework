@@ -11,6 +11,10 @@ import static util.Util.sleep;
 
 public class CalculatorPage extends AbstractPage {
 
+    String selectionPattern = "//md-option/div[contains(text(),'%s')]";
+
+    private final By firstFrame = By.xpath("//iframe[contains(@src,'https://cloud.google.com/products/calculator/index')]");
+    private final By secondFrame = By.id("myFrame");
     private final By compEngine = By.xpath("//md-tab-item[@class='md-tab ng-scope ng-isolate-scope md-ink-ripple md-active']//descendant::div[@class='hexagon-in2']");
     //    private final By compEngine = By.xpath("//md-pagination-wrapper//div[@title='Compute Engine']/div[@class='presets-buttons layout-sm-column layout-align-center-center layout-column']//div[@title=\"Compute Engine\"]");
     private final By numberOfInstances = By.xpath("//label[contains(text(),\"Number of instances\")]/following-sibling::input");
@@ -44,8 +48,10 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public hardcode.CalculatorPage switchToCalculator() {
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'https://cloud.google.com/products/calculator/index')]")));
-        driver.switchTo().frame(driver.findElement(By.id("myFrame")));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstFrame));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(secondFrame));
+        //        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'https://cloud.google.com/products/calculator/index')]")));
+//        driver.switchTo().frame(driver.findElement(By.id("myFrame")));
         return this;
     }
 
@@ -63,25 +69,25 @@ public class CalculatorPage extends AbstractPage {
 
         click(operatingSystemAndSoftwareDDD);
 //        driver.findElements(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", text))).click();
-        click(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", text)));
+        click(By.xpath(String.format(selectionPattern, text)));
         return this;
     }
 
     public hardcode.CalculatorPage setVMClass(String text) {
         click(virtualMClassDDD);
-        driver.findElements(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", text))).get(1).click();
+        driver.findElements(By.xpath(String.format(selectionPattern, text))).get(1).click();
         return this;
     }
 
     public hardcode.CalculatorPage setInstanceSeries(String text) {
         click(instanceSeriesDDD);
-        click(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", text)));
+        click(By.xpath(String.format(selectionPattern, text)));
         return this;
     }
 
     public hardcode.CalculatorPage setInstanceType(String type) {
         click(instanceTypeDDD);
-        click(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", type)));
+        click(By.xpath(String.format(selectionPattern, type)));
         return this;
     }
 
@@ -96,7 +102,7 @@ public class CalculatorPage extends AbstractPage {
 
     public hardcode.CalculatorPage setLocalSSD(String type) {
         click(localSSD);
-        click(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", type)));
+        click(By.xpath(String.format(selectionPattern, type)));
         return this;
     }
 
