@@ -25,7 +25,6 @@ public class TenMinutesPage extends AbstractPage {
 
     public TenMinutesPage(WebDriver driver) {
         super(driver);
-//        this.driver = driver;
     }
 
     public TenMinutesPage openPage() {
@@ -34,13 +33,9 @@ public class TenMinutesPage extends AbstractPage {
         return this;
     }
 
-    public String copyEmail() {
+    public String copyEmail() throws Exception{
         click(copyEmailButton);
-        try {
-            return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
     }
 
 //    public TenMinutesPage saveEmailInBuffer() {

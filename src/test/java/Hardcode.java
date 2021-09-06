@@ -4,10 +4,8 @@ import hardcode.MainPage;
 import hardcode.TenMinutesPage;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 
 import static util.Util.switchToTab;
 
@@ -18,11 +16,11 @@ public class Hardcode extends AbstractTest {
 
 
     @Test
-    public void verifyThatSendEmailCorrespondsToTheDataOfTheCalculatorTest() throws IOException, UnsupportedFlavorException {
+    public void verifyThatSendEmailCorrespondsToTheDataOfTheCalculatorTest() throws Exception {
         String TEXTFORSEARCHCALKULATOR = "Google Cloud Platform Pricing Calculator";
         String VMCLASS = "Regular";
-        String INSTANCETYPE = "n1-standard-8 (vCPUs: 8, RAM: 30GB)";
-        String REGION = "Frankfurt (europe-west3)";
+        String INSTANCETYPE = "n1-standard-8";
+        String REGION = "Frankfurt";
         String LOCALSSD = "2x375 GB";
         String COMMITMENTTERM = "1 Year";
 
@@ -47,21 +45,23 @@ public class Hardcode extends AbstractTest {
 //                .createEmailEstimate();
 
         SoftAssertions assertions = new SoftAssertions();
-        assertions.assertThat(calculatorPage.getVMClass()).containsIgnoringCase(VMCLASS);
-        assertions.assertThat(calculatorPage.getInstanceType())
+        assertions.assertThat(emailEstimatePage.getVMClass()).containsIgnoringCase(VMCLASS);
+        assertions.assertThat(emailEstimatePage.getInstanceType())
                 .contains(INSTANCETYPE.replaceAll("\\(.*\\)", "").trim());
-        assertions.assertThat(calculatorPage.getRegion())
+        assertions.assertThat(emailEstimatePage.getRegion())
                 .contains(REGION.replaceAll("\\(.*\\)", "").trim());
-        assertions.assertThat(calculatorPage.getLocalSSD().replaceAll("[GB | GiB]", "").trim())
+        assertions.assertThat(emailEstimatePage.getLocalSSD().replaceAll("[GB | GiB]", "").trim())
                 .contains(LOCALSSD.replaceAll("[GB | GiB]", "").trim());
-        assertions.assertThat(calculatorPage.getCommitmentTerm())
+        assertions.assertThat(emailEstimatePage.getCommitmentTerm())
                 .contains(COMMITMENTTERM);
         assertions.assertAll();
 
-        String totalCostFromCalculatorPage = calculatorPage.getTotalCost();
-        String sumOnlyFromTotalCost = totalCostFromCalculatorPage.substring(totalCostFromCalculatorPage.indexOf(":") + 2, totalCostFromCalculatorPage.indexOf("per") - 1);
+//        String totalCostFromCalculatorPage = emailEstimatePage.getTotalCost();
+//        String sumOnlyFromTotalCost = totalCostFromCalculatorPage.substring(totalCostFromCalculatorPage.indexOf(":") + 2, totalCostFromCalculatorPage.indexOf("per") - 1);
 
-        TenMinutesPage emailPage = new TenMinutesPage(WebDriverProvider.getDriver());
+        String sumOnlyFromTotalCost = emailEstimatePage.getTotalCost();
+
+        TenMinutesPage emailPage = new TenMinutesPage(driver);
         String emailFromBufer = emailPage.openPage()
                 .copyEmail();
         switchToTab(0);
@@ -77,15 +77,15 @@ public class Hardcode extends AbstractTest {
 ////        String emailFromBuffer = tenMinuteMailPage.getRandomEmail();
 //        driver.switchTo().window(tabs.get(0));
 
-        calculatorPage.switchToCalculator()
+        emailEstimatePage.switchToCalculator()
                 .sendEmail(emailFromBufer);
 
         switchToTab(1);
 //        driver.switchTo().window(tabs.get(1));
-        emailPage.openLetter()
-                .getTotalSumFromLetter();
+        emailPage.openLetter();
+//                .getTotalSumFromLetter();
 
         String totalCostFromLetter = emailPage.getTotalSumFromLetter();
-        assertions.assertThat(sumOnlyFromTotalCost.equals(totalCostFromLetter));
+        Assert.assertEquals(sumOnlyFromTotalCost, totalCostFromLetter);
     }
 }

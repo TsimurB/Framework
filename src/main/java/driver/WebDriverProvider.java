@@ -27,18 +27,6 @@ public class WebDriverProvider {
         }
         return driver;
     }
-//        if (driver == null) {
-//            if ("firefox".equals(System.getProperty("browser"))) {
-//                WebDriverManager.firefoxdriver().setup();
-//                driver = new FirefoxDriver();
-//                    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//            }
-//            WebDriverManager.chromedriver().setup();
-//            driver = new ChromeDriver();
-//                    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//            driver.manage().window().maximize();
-//        }
-//        return driver;
 
     public static void closeDriver() {
         driver.quit();
