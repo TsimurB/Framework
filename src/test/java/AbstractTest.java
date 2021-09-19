@@ -1,16 +1,26 @@
+//import com.codeborne.selenide.testng.ScreenShooter;
+
+import com.codeborne.selenide.testng.ScreenShooter;
 import driver.WebDriverProvider;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
+
+@Listeners({ScreenShooter.class})
 public class AbstractTest {
-    WebDriver driver;
+    protected WebDriver driver;
+
+    @BeforeSuite()
+    public void setUp(){
+        System.setProperty("browser", "chrome");
+    }
 
     @BeforeMethod(alwaysRun = true)
     public void openDriver() {
-        driver = new ChromeDriver();
-//        driver = WebDriverProvider.getDriver();
+        driver = WebDriverProvider.getDriver();
         driver.manage().window().maximize();
     }
 
@@ -19,16 +29,4 @@ public class AbstractTest {
         WebDriverProvider.getDriver().close();
         WebDriverProvider.closeDriver();
     }
-
-//    @BeforeMethod(alwaysRun = true)
-//    public void browserSetup() {
-//        driver = new ChromeDriver();
-//        driver.manage().window().maximize();
-//    }
-
-//    @AfterMethod(alwaysRun = true)
-//    public void browserTearDown() {
-//        driver.quit();
-//        driver = null;
-//    }
 }

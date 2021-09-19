@@ -3,13 +3,14 @@ import hardcode.CalculatorPage;
 import hardcode.MainPage;
 import hardcode.TenMinutesPage;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static util.Util.switchToTab;
 
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Hardcode extends AbstractTest {
     private CalculatorPage calculatorPage;
     public WebDriver driver;
@@ -17,43 +18,43 @@ public class Hardcode extends AbstractTest {
 
     @Test
     public void verifyThatSendEmailCorrespondsToTheDataOfTheCalculatorTest() throws Exception {
-        String TEXTFORSEARCHCALKULATOR = "Google Cloud Platform Pricing Calculator";
-        String VMCLASS = "Regular";
-        String INSTANCETYPE = "n1-standard-8";
-        String REGION = "Frankfurt";
-        String LOCALSSD = "2x375 GB";
-        String COMMITMENTTERM = "1 Year";
+        String textForSearchCalkulator = "Google Cloud Platform Pricing Calculator";
+        String VMClass = "Regular";
+        String instanceType = "n1-standard-8";
+        String region = "Frankfurt";
+        String lokalSSD = "2x375 GB";
+        String commitmentTerm = "1 Year";
 
         this.calculatorPage = new CalculatorPage(WebDriverProvider.getDriver());
         MainPage mainPage = new MainPage(WebDriverProvider.getDriver());
         CalculatorPage emailEstimatePage = mainPage
                 .open()
-                .searchPage(TEXTFORSEARCHCALKULATOR + "\n")
+                .searchPage(textForSearchCalkulator + "\n")
                 .findCalk()
                 .switchToCalculator()
                 .initCompEngine()
                 .setNumberOfInstances("4")
                 .setOperatingSystemAndSoftware("Free: Debian, CentOS, CoreOS, Ubuntu or BYOL (Bring Your Own License)")
-                .setVMClass(VMCLASS)
+                .setVMClass(VMClass)
                 .setInstanceSeries("N1")
-                .setInstanceType(INSTANCETYPE)
+                .setInstanceType(instanceType)
                 .setCheckboxAddGPUs(1, "NVIDIA Tesla V100")
-                .setLocalSSD(LOCALSSD)
-                .setDatacenterLocation(REGION)
-                .setCommittedUsage(COMMITMENTTERM)
+                .setLocalSSD(lokalSSD)
+                .setDatacenterLocation(region)
+                .setCommittedUsage(commitmentTerm)
                 .createEstimatePage();
 //                .createEmailEstimate();
 
         SoftAssertions assertions = new SoftAssertions();
-        assertions.assertThat(emailEstimatePage.getVMClass()).containsIgnoringCase(VMCLASS);
+        assertions.assertThat(emailEstimatePage.getVMClass()).containsIgnoringCase(VMClass);
         assertions.assertThat(emailEstimatePage.getInstanceType())
-                .contains(INSTANCETYPE.replaceAll("\\(.*\\)", "").trim());
+                .contains(instanceType.replaceAll("\\(.*\\)", "").trim());
         assertions.assertThat(emailEstimatePage.getRegion())
-                .contains(REGION.replaceAll("\\(.*\\)", "").trim());
+                .contains(region.replaceAll("\\(.*\\)", "").trim());
         assertions.assertThat(emailEstimatePage.getLocalSSD().replaceAll("[GB | GiB]", "").trim())
-                .contains(LOCALSSD.replaceAll("[GB | GiB]", "").trim());
+                .contains(lokalSSD.replaceAll("[GB | GiB]", "").trim());
         assertions.assertThat(emailEstimatePage.getCommitmentTerm())
-                .contains(COMMITMENTTERM);
+                .contains(commitmentTerm);
         assertions.assertAll();
 
 //        String totalCostFromCalculatorPage = emailEstimatePage.getTotalCost();
