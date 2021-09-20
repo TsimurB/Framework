@@ -1,15 +1,13 @@
-//import com.codeborne.selenide.testng.ScreenShooter;
-
-import com.codeborne.selenide.testng.ScreenShooter;
 import driver.WebDriverProvider;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
+import util.TestListeners;
 
 
-@Listeners({ScreenShooter.class})
+@Listeners({TestListeners.class})
 public class AbstractTest {
     protected WebDriver driver;
 

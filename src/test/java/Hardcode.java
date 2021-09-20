@@ -3,14 +3,13 @@ import hardcode.CalculatorPage;
 import hardcode.MainPage;
 import hardcode.TenMinutesPage;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static util.Util.switchToTab;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Hardcode extends AbstractTest {
     private CalculatorPage calculatorPage;
     public WebDriver driver;
