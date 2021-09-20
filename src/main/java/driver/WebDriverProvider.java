@@ -20,10 +20,10 @@ public class WebDriverProvider {
                     driver = new FirefoxDriver();
                 }
                 default: {
-                    System.out.println("rhfbnehwfjkm" + System.getProperty("browser"));
+                    System.out.println("rhfbnehwfjkm " + System.getProperty("browser"));
                     WebDriverManager.chromiumdriver().setup();
                     ChromeOptions options = new ChromeOptions();
-//                    options.addArguments("--headless");
+                    options.addArguments("--headless");
                     driver = new ChromeDriver(options);
                 }
             }
