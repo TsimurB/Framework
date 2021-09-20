@@ -19,7 +19,7 @@ public class WebDriverProvider {
                     driver = new FirefoxDriver();
                 }
                 default: {
-                    WebDriverManager.chromedriver().setup();
+                    WebDriverManager.chromiumdriver().setup();
                     driver = new ChromeDriver();
                 }
             }
