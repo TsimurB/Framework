@@ -13,7 +13,8 @@ public class AbstractTest {
 
     @BeforeSuite()
     public void setUp(){
-        System.setProperty("browser", "chrome");
+        System.out.println("fhghjtytu " + System.getProperty("browser"));
+//        System.setProperty("browser", "chrome");
     }
 
     @BeforeMethod(alwaysRun = true)
