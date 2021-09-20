@@ -24,6 +24,11 @@ public class WebDriverProvider {
                     WebDriverManager.chromiumdriver().setup();
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--headless");
+                    options.addArguments("--no-sandbox");
+                    options.setExperimentalOption("useAutomationExte\nsion", false);
+                    options.addArguments("--disable-dev-shm-usage");
+                    options.addArguments("--disable-notifications---");
+                    options.addArguments("--disable-setuid-sandbox");
                     driver = new ChromeDriver(options);
                 }
             }
