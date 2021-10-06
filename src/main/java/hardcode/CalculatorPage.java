@@ -16,7 +16,6 @@ public class CalculatorPage extends AbstractPage {
     private final By firstFrame = By.xpath("//iframe[contains(@src,'https://cloud.google.com/products/calculator/index')]");
     private final By secondFrame = By.id("myFrame");
     private final By compEngine = By.xpath("//md-tab-item[@class='md-tab ng-scope ng-isolate-scope md-ink-ripple md-active']//descendant::div[@class='hexagon-in2']");
-    //    private final By compEngine = By.xpath("//md-pagination-wrapper//div[@title='Compute Engine']/div[@class='presets-buttons layout-sm-column layout-align-center-center layout-column']//div[@title=\"Compute Engine\"]");
     private final By numberOfInstances = By.xpath("//label[contains(text(),\"Number of instances\")]/following-sibling::input");
     private final By operatingSystemAndSoftwareDDD = By.xpath("//label[contains(text(),\"Operating System / Software\")]/following-sibling::md-select");
     private final By virtualMClassDDD = By.xpath("//label[contains(text(),\"Machine Class\")]/following-sibling::md-select");
@@ -33,7 +32,6 @@ public class CalculatorPage extends AbstractPage {
     private final By buttonEmailEstimate = By.xpath("//md-card-content[@id='resultBlock']//button[@id='email_quote']");
     private final By fieldForEmail = By.xpath("//div[@class='md-dialog-container ng-scope']//md-input-container//label[contains(text(), 'Email')]//following-sibling::input");
     private final By buttonSendEmail = By.xpath("//md-dialog-actions[@class='layout-row']//button[@class='md-raised md-primary cpc-button md-button md-ink-ripple']");
-//    private final By estimatedCostResult = By.xpath("//md-list-item[@class='md-1-line md-no-proxy']/div[@class='md-list-item-text']/b[@class='ng-binding']");
     @FindBy(xpath = "//md-list-item[@class='md-1-line md-no-proxy']/div[@class='md-list-item-text']/b[@class='ng-binding']")
     private WebElement estimatedCostResult;
 
@@ -50,8 +48,6 @@ public class CalculatorPage extends AbstractPage {
     public hardcode.CalculatorPage switchToCalculator() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstFrame));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(secondFrame));
-        //        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'https://cloud.google.com/products/calculator/index')]")));
-//        driver.switchTo().frame(driver.findElement(By.id("myFrame")));
         return this;
     }
 
@@ -68,7 +64,6 @@ public class CalculatorPage extends AbstractPage {
     public hardcode.CalculatorPage setOperatingSystemAndSoftware(String text) {
 
         click(operatingSystemAndSoftwareDDD);
-//        driver.findElements(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", text))).click();
         click(By.xpath(String.format(selectionPattern, text)));
         return this;
     }
@@ -114,7 +109,6 @@ public class CalculatorPage extends AbstractPage {
 
     public hardcode.CalculatorPage setCommittedUsage(String type) {
         driver.findElement(committedUsageDDD).sendKeys(type);
-//        click(By.xpath(String.format("//md-option/div[contains(text(),'%s')]", type)));
         clickAway();
         return this;
     }
@@ -127,8 +121,6 @@ public class CalculatorPage extends AbstractPage {
     public hardcode.EmailEstimatePage createEmailEstimate() {
 
         click(submitEmailEstimate);
-//        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'https://cloud.google.com/products/calculator/index')]")));
-//        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'https://cloudpricingcalculator.appspot.com?hl=ru')]")));
         return new hardcode.EmailEstimatePage(driver);
     }
 

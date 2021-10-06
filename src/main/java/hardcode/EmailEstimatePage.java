@@ -7,8 +7,6 @@ public class EmailEstimatePage extends AbstractPage{
 public static final String TAB_NAME="Google Cloud Platform";
 private By emailField = By.xpath("//input[@type=\"email\"]");
 
-//    private final WebDriver driver;
-
     public EmailEstimatePage(WebDriver driver) { super(driver);}
 
     public hardcode.EmailEstimatePage typeEmail(String email){

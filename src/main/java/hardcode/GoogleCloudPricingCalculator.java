@@ -12,11 +12,6 @@ public class GoogleCloudPricingCalculator extends AbstractPage {
         super(driver);
     }
 
-//    public hardcode.CalculatorPage initCompEngine() {
-//        click(compEngine);
-//        return new hardcode.CalculatorPage(driver);
-//    }
-
     public hardcode.CalculatorPage findCalk() {
         click(choseCalk);
         return new hardcode.CalculatorPage(driver);

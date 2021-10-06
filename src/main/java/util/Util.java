@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Util {
-//    private static final String EMAIL_PAGE_ADDRESS = "https://tempmail.plus/ru/#!";
     public static void sleep(int time) {
         try {
             Thread.sleep(time);
@@ -21,10 +20,6 @@ public class Util {
             e.printStackTrace();
         }
     }
-
-//    public static String getPageTitle() {
-//        return getDriver().getTitle();
-//    }
 
     public static void click(By locator) {
         getWait(3).until(driver -> ExpectedConditions.elementToBeClickable(locator));
