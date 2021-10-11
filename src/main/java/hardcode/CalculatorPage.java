@@ -1,5 +1,7 @@
 package hardcode;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +12,7 @@ import static util.Util.click;
 import static util.Util.sleep;
 
 public class CalculatorPage extends AbstractPage {
-
+    private final Logger logger = LogManager.getRootLogger();
     String selectionPattern = "//md-option/div[contains(text(),'%s')]";
 
     private final By firstFrame = By.xpath("//iframe[contains(@src,'https://cloud.google.com/products/calculator/index')]");
@@ -48,16 +50,19 @@ public class CalculatorPage extends AbstractPage {
     public hardcode.CalculatorPage switchToCalculator() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstFrame));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(secondFrame));
+        logger.info("Switch to calculator");
         return this;
     }
 
     public hardcode.CalculatorPage initCompEngine() {
         click(compEngine);
+        logger.info("Initialized to calculator");
         return this;
     }
 
     public hardcode.CalculatorPage setNumberOfInstances(String text) {
         driver.findElement(numberOfInstances).sendKeys(text);
+        logger.info("Setted number of instance: " + text);
         return this;
     }
 
@@ -65,24 +70,28 @@ public class CalculatorPage extends AbstractPage {
 
         click(operatingSystemAndSoftwareDDD);
         click(By.xpath(String.format(selectionPattern, text)));
+        logger.info("Setted operating system and software: " + text);
         return this;
     }
 
     public hardcode.CalculatorPage setVMClass(String text) {
         click(virtualMClassDDD);
         driver.findElements(By.xpath(String.format(selectionPattern, text))).get(1).click();
+        logger.info("Setted virtual machine class: " + text);
         return this;
     }
 
     public hardcode.CalculatorPage setInstanceSeries(String text) {
         click(instanceSeriesDDD);
         click(By.xpath(String.format(selectionPattern, text)));
+        logger.info("Setted instance series: " + text);
         return this;
     }
 
     public hardcode.CalculatorPage setInstanceType(String type) {
         click(instanceTypeDDD);
         click(By.xpath(String.format(selectionPattern, type)));
+        logger.info("Setted instance type:" + type);
         return this;
     }
 
@@ -90,31 +99,37 @@ public class CalculatorPage extends AbstractPage {
         click(CheckboxAddGPUs);
         click(numberOfGPUsDDD);
         click(By.xpath(String.format("//md-option[contains(@ng-repeat,\"supportedGpuNumbers\")]/div[contains(text(),'%s')]", number)));
+        logger.info("Setted number of GPU: " + number);
         click(typeGPUsDDD);
         click(By.xpath(String.format("//md-option[contains(@ng-repeat,\"gpuList\")]/div[contains(text(),'%s')]", type)));
+        logger.info("Setted type of GPU:" + type);
         return this;
     }
 
     public hardcode.CalculatorPage setLocalSSD(String type) {
         click(localSSD);
         click(By.xpath(String.format(selectionPattern, type)));
+        logger.info("Setted local SSD:" + type);
         return this;
     }
 
     public hardcode.CalculatorPage setDatacenterLocation(String type) {
         click(datacenterLocationDDD);
         click(By.xpath(String.format("//md-select-menu[@class]//md-option[contains(@ng-repeat,\"fullRegionList\")]/div[contains(text(),'%s')]", type)));
+        logger.info("Setted datacenter location: " + type);
         return this;
     }
 
     public hardcode.CalculatorPage setCommittedUsage(String type) {
         driver.findElement(committedUsageDDD).sendKeys(type);
         clickAway();
+        logger.info("Setted committed usage DDD: " + type);
         return this;
     }
 
     public hardcode.CalculatorPage createEstimatePage() {
         click(submitAddToEstimateComputeEngineForm);
+        logger.info("Created Estimate Page");
         return this;
     }
 

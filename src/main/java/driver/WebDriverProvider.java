@@ -2,8 +2,6 @@ package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class WebDriverProvider {
@@ -19,18 +17,18 @@ public class WebDriverProvider {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
                 }
-                default: {
-                    System.out.println("rhfbnehwfjkm " + System.getProperty("browser"));
-                    WebDriverManager.chromiumdriver().setup();
-                    ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--headless");
-                    options.addArguments("--no-sandbox");
-                    options.setExperimentalOption("useAutomationExtension", false);
-                    options.addArguments("--disable-dev-shm-usage");
-                    options.addArguments("--disable-notifications---");
-                    options.addArguments("--disable-setuid-sandbox");
-                    driver = new ChromeDriver(options);
-                }
+//                default: {
+//                    System.out.println("rhfbnehwfjkm " + System.getProperty("browser"));
+//                    WebDriverManager.chromiumdriver().setup();
+//                    ChromeOptions options = new ChromeOptions();
+//                    options.addArguments("--headless");
+//                    options.addArguments("--no-sandbox");
+//                    options.setExperimentalOption("useAutomationExtension", false);
+//                    options.addArguments("--disable-dev-shm-usage");
+//                    options.addArguments("--disable-notifications---");
+//                    options.addArguments("--disable-setuid-sandbox");
+//                    driver = new ChromeDriver(options);
+//                }
             }
             driver.manage().window().maximize();
         }

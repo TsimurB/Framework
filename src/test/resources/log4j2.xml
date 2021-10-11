@@ -6,7 +6,7 @@
                 <Pattern>%d %p %c{2} [%t] %l %m%n</Pattern>
             </PatternLayout>
         </Console>
-        <File name="File" fileName="target/logs/github-automation.log">
+        <File name="File" fileName="target/logs/logfile_test.log">
             <PatternLayout>
                 <Pattern>%d %p %c{2} [%t] %m%n</Pattern>
             </PatternLayout>
@@ -19,3 +19,19 @@
         </Root>
     </Loggers>
 </Configuration>
+
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">-->
+<!--<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>-->
+
+<!--    <appender name="foleAppender" class="org.apache.log4j.RollingFileAppender">-->
+<!--        <param name="maxFileSize" value="1KB"/>-->
+<!--        <param name="maxBackupIndex" value="2"/>-->
+<!--        <param name="file" value="target/logfile_test.log"/>-->
+<!--        <layout class="org.apache.log4j.PatternLayout">-->
+<!--            <param name="ConversionPattern"-->
+<!--                value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"/>-->
+<!--        </layout>-->
+<!--    </appender>-->
+
+<!--</log4j:configuration>-->

@@ -4,6 +4,8 @@ import hardcode.MainPage;
 import hardcode.TenMinutesPage;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,13 +13,14 @@ import static util.Util.switchToTab;
 
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Hardcode extends AbstractTest {
+    private static final Logger logger = LoggerFactory.getLogger(Hardcode.class);
     private CalculatorPage calculatorPage;
     public WebDriver driver;
 
 
     @Test
     public void verifyThatSendEmailCorrespondsToTheDataOfTheCalculatorTest() throws Exception {
-        String textForSearchCalkulator = "Google Cloud Platform Pricing Calculator";
+        //String textForSearchCalkulator = "Google Cloud Platform Pricing Calculator";
         String VMClass = "Regular";
         String instanceType = "n1-standard-8";
         String region = "Frankfurt";
