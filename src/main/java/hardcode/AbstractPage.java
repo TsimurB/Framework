@@ -13,9 +13,4 @@ public class AbstractPage {
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver, 30);
     }
-
-
-//    public static WebElement waitForElementLocatedBy(WebDriver driver, By way) {
-//        return new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(way));
-//    }
 }

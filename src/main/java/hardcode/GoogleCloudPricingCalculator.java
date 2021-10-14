@@ -19,5 +19,4 @@ public class GoogleCloudPricingCalculator extends AbstractPage {
         logger.info("Calculator page found");
         return new hardcode.CalculatorPage(driver);
     }
-
 }
