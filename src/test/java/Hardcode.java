@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import service.TestDataReader;
 
 import static util.Util.switchToTab;
 
@@ -20,73 +21,56 @@ public class Hardcode extends AbstractTest {
 
     @Test
     public void verifyThatSendEmailCorrespondsToTheDataOfTheCalculatorTest() throws Exception {
-        //String textForSearchCalkulator = "Google Cloud Platform Pricing Calculator";
-        String VMClass = "Regular";
-        String instanceType = "n1-standard-8";
-        String region = "Frankfurt";
-        String lokalSSD = "2x375 GB";
-        String commitmentTerm = "1 Year";
+        String textForSearchCalkulator = "text.for.search.calkulator";
+        String VMClass = "VM.clas";
+        String instanceType = "instance.type";
+        String region = "region";
+        String lokalSSD = "lokal.SSD";
+        String commitmentTerm = "commitment.term";
 
         this.calculatorPage = new CalculatorPage(WebDriverProvider.getDriver());
         MainPage mainPage = new MainPage(WebDriverProvider.getDriver());
         CalculatorPage emailEstimatePage = mainPage
                 .open()
-                .searchPage(textForSearchCalkulator + "\n")
+                .searchPage(TestDataReader.getTestData(textForSearchCalkulator) + "\n")
                 .findCalk()
                 .switchToCalculator()
                 .initCompEngine()
                 .setNumberOfInstances("4")
                 .setOperatingSystemAndSoftware("Free: Debian, CentOS, CoreOS, Ubuntu or BYOL (Bring Your Own License)")
-                .setVMClass(VMClass)
+                .setVMClass(TestDataReader.getTestData(TestDataReader.getTestData(VMClass)))
                 .setInstanceSeries("N1")
-                .setInstanceType(instanceType)
+                .setInstanceType(TestDataReader.getTestData(instanceType))
                 .setCheckboxAddGPUs(1, "NVIDIA Tesla V100")
-                .setLocalSSD(lokalSSD)
-                .setDatacenterLocation(region)
-                .setCommittedUsage(commitmentTerm)
+                .setLocalSSD(TestDataReader.getTestData(lokalSSD))
+                .setDatacenterLocation(TestDataReader.getTestData(region))
+                .setCommittedUsage(TestDataReader.getTestData(commitmentTerm))
                 .createEstimatePage();
-//                .createEmailEstimate();
 
         SoftAssertions assertions = new SoftAssertions();
-        assertions.assertThat(emailEstimatePage.getVMClass()).containsIgnoringCase(VMClass);
+        assertions.assertThat(emailEstimatePage.getVMClass()).containsIgnoringCase(TestDataReader.getTestData(VMClass));
         assertions.assertThat(emailEstimatePage.getInstanceType())
-                .contains(instanceType.replaceAll("\\(.*\\)", "").trim());
+                .contains(TestDataReader.getTestData(instanceType).replaceAll("\\(.*\\)", "").trim());
         assertions.assertThat(emailEstimatePage.getRegion())
-                .contains(region.replaceAll("\\(.*\\)", "").trim());
+                .contains(TestDataReader.getTestData(region).replaceAll("\\(.*\\)", "").trim());
         assertions.assertThat(emailEstimatePage.getLocalSSD().replaceAll("[GB | GiB]", "").trim())
-                .contains(lokalSSD.replaceAll("[GB | GiB]", "").trim());
+                .contains(TestDataReader.getTestData(lokalSSD).replaceAll("[GB | GiB]", "").trim());
         assertions.assertThat(emailEstimatePage.getCommitmentTerm())
-                .contains(commitmentTerm);
+                .contains(TestDataReader.getTestData(commitmentTerm));
         assertions.assertAll();
 
-//        String totalCostFromCalculatorPage = emailEstimatePage.getTotalCost();
-//        String sumOnlyFromTotalCost = totalCostFromCalculatorPage.substring(totalCostFromCalculatorPage.indexOf(":") + 2, totalCostFromCalculatorPage.indexOf("per") - 1);
-
         String sumOnlyFromTotalCost = emailEstimatePage.getTotalCost();
-
         TenMinutesPage emailPage = new TenMinutesPage(driver);
         String emailFromBufer = emailPage.openPage()
                 .copyEmail();
         switchToTab(0);
 //        emailEstimatePage.typeEmail(emailFromBufer);
 
-//        (JavascriptExecutor) driver).executeScript("window.open()");
-//        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-//        driver.switchTo().window(tabs.get(1));
-
-//        TenMinutesPage tenMinuteMailPage = new TenMinutesPage(driver);
-//        tenMinuteMailPage.openPage()
-//                .saveEmailInBuffer();
-////        String emailFromBuffer = tenMinuteMailPage.getRandomEmail();
-//        driver.switchTo().window(tabs.get(0));
-
         emailEstimatePage.switchToCalculator()
                 .sendEmail(emailFromBufer);
 
         switchToTab(1);
-//        driver.switchTo().window(tabs.get(1));
         emailPage.openLetter();
-//                .getTotalSumFromLetter();
 
         String totalCostFromLetter = emailPage.getTotalSumFromLetter();
         Assert.assertEquals(sumOnlyFromTotalCost, totalCostFromLetter);
