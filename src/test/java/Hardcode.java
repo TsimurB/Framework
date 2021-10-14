@@ -3,6 +3,7 @@ import hardcode.CalculatorPage;
 import hardcode.MainPage;
 import hardcode.TenMinutesPage;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,7 @@ import service.TestDataReader;
 
 import static util.Util.switchToTab;
 
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Hardcode extends AbstractTest {
     private static final Logger logger = LoggerFactory.getLogger(Hardcode.class);
     private CalculatorPage calculatorPage;
