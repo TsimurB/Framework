@@ -1,6 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Hardcode" verbose="1" >
+    <listeners>
+        <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
+    </listeners>
+    <parameter name="browser" value="chrome"/>
     <test name="Hardcode"   >
         <classes>
             <class name="Hardcode" />
